@@ -26,7 +26,10 @@ export default async function uploadCache(): Promise<number | undefined> {
           core.info(`Cannot save actionsflow cache [${key}] at github`);
         }
         return cacheId;
-      } catch (error) {
+      } catch (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        error: any
+      ) {
         if (error.name === cache.ValidationError.name) {
           throw error;
         } else if (error.name === cache.ReserveCacheError.name) {

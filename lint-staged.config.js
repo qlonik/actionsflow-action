@@ -2,12 +2,8 @@
 const micromatch = require("micromatch");
 
 module.exports = {
-  "*.{js,ts}": [
-    "eslint --cache --ext .js,.ts --fix",
-    "prettier --write",
-    "git add",
-  ],
-  "*.{md,yaml,yml,json}": ["prettier --write", "git add"],
+  "*.{js,ts}": ["eslint --cache --ext .js,.ts --fix", "prettier --write"],
+  "*.{md,yaml,yml,json}": ["prettier --write"],
   // "*.md": ["remark --quiet --frail"],
   "*.md": (files) => {
     // from `files` filter those _NOT_ matching `*test.js`

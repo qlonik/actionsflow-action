@@ -35,7 +35,10 @@ export default async function uploadNodeModulesCache(): Promise<
           core.info(`Cannot save npm cache [${finalCacheKey}] at github`);
         }
         return cacheId;
-      } catch (error) {
+      } catch (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        error: any
+      ) {
         if (error.name === cache.ValidationError.name) {
           throw error;
         } else if (error.name === cache.ReserveCacheError.name) {

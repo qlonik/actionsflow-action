@@ -13,10 +13,10 @@ export default async function exportLastUpdateAtEnv(): Promise<{
   const token = secrets.GITHUB_TOKEN;
 
   const octokit = github.getOctokit(token);
-  const result = await octokit.actions.listWorkflowRuns({
+  const result = await octokit.rest.actions.listWorkflowRuns({
     owner: context.repo.owner,
     repo: context.repo.repo,
-    workflow_id: (ACTIONSFLOW_WORKFLOW_FILE_NAME as unknown) as number,
+    workflow_id: ACTIONSFLOW_WORKFLOW_FILE_NAME as unknown as number,
     per_page: 2,
   });
   let createAtTime: number | undefined;

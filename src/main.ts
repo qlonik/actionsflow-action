@@ -139,7 +139,10 @@ async function main() {
     }
 
     core.setOutput("success", true);
-  } catch (error) {
+  } catch (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    error: any
+  ) {
     core.debug("Finish command but error: start to post task");
     if (isBuild) {
       // Still send cache key file

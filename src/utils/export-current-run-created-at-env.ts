@@ -10,7 +10,7 @@ export default async function exportCurrentRunCreatedAtEnv(): Promise<{
   const token = secrets.GITHUB_TOKEN;
 
   const octokit = github.getOctokit(token);
-  const result = await octokit.actions.getWorkflowRun({
+  const result = await octokit.rest.actions.getWorkflowRun({
     owner: context.repo.owner,
     repo: context.repo.repo,
     run_id: context.runId,

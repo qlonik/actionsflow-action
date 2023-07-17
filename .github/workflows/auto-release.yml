@@ -1,13 +1,23 @@
 name: Release
+
 on:
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - "dist/**"
   workflow_dispatch:
   repository_dispatch:
     types: [new_version_with_actionsflow]
+
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Checkout Branch
@@ -16,12 +26,16 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
       - name: Update & Build
         run: |
           npm ci
@@ -32,18 +46,8 @@ jobs:
         run: git status
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git add dist/main/index.js package.json package-lock.json
-          git diff-index --quiet HEAD || git commit -m "chore\(release\): 🤖 update actionsflow dependence & build bundle"
+          git add dist/main/index.js dist/post/index.js package.json package-lock.json
+          git diff-index --quiet HEAD || git commit -m "chore(release): 🤖 update actionsflow dependence & build bundle"
           npm run release
-      - uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          text: Auto release actionsflow-action
-          author_name:
-          fields: repo,message,author,ref,job,took # selectable (default: repo,message)
-        env:
-          GITHUB_TOKEN: ${{ github.token }} # optional
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_RELEASE_WEBHOOK }} # required
-        if: always() # Pick up events even if the job fails or is canceled.

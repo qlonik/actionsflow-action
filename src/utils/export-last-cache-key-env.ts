@@ -14,7 +14,7 @@ export default async function exportLastCacheKeyEnv(): Promise<{
 
   const octokit = github.getOctokit(token);
   let cacheKey = "";
-  const result = await octokit.actions.listArtifactsForRepo({
+  const result = await octokit.rest.actions.listArtifactsForRepo({
     owner: context.repo.owner,
     repo: context.repo.repo,
   });

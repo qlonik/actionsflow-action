@@ -11,10 +11,10 @@ test("local build", async () => {
   });
   process.env.GITHUB_ACTIONS = _tempGITHUB_ACTIONS;
   expect(
-    fs.existsSync(path.resolve(__dirname, "./fixtures/node_modules"))
+    fs.existsSync(path.resolve(__dirname, "./fixtures/node_modules")),
   ).toBe(true);
   expect(
-    fs.existsSync(path.resolve(__dirname, "./fixtures/dist/workflows"))
+    fs.existsSync(path.resolve(__dirname, "./fixtures/dist/workflows")),
   ).toBe(true);
   // clean
   await del([
@@ -56,18 +56,18 @@ test("local build webhook", async () => {
   process.env.GITHUB_ACTIONS = "false";
   await run(
     `build --cwd ./src/__tests__/fixtures -i webhook.yml --json-github ${getEscapedArgs(
-      JSON.stringify(githubObj)
+      JSON.stringify(githubObj),
     )}`,
     {
       cwd: path.resolve(__dirname, "./fixtures"),
-    }
+    },
   );
   process.env.GITHUB_ACTIONS = _tempGITHUB_ACTIONS;
   expect(
-    fs.existsSync(path.resolve(__dirname, "./fixtures/node_modules"))
+    fs.existsSync(path.resolve(__dirname, "./fixtures/node_modules")),
   ).toBe(true);
   expect(
-    fs.existsSync(path.resolve(__dirname, "./fixtures/dist/workflows"))
+    fs.existsSync(path.resolve(__dirname, "./fixtures/dist/workflows")),
   ).toBe(true);
   // clean
   await del([
