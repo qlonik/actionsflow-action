@@ -1,3 +1,5 @@
+## [2.0.1](https://github.com/actionsflow/actionsflow-action/compare/v2...v2.0.1) (2023-07-18)
+
 # [2.0.0](https://github.com/actionsflow/actionsflow-action/compare/v1...v2.0.0) (2023-07-18)
 
 ### chore
