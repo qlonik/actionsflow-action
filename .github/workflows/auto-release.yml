@@ -42,10 +42,9 @@ jobs:
         with:
           app_id: "${{ secrets.BOT_APP_ID }}"
           private_key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
-      - name: Update & Build
+      - name: Build & Test
         run: |
           npm ci
-          npm update
           npm run build
           npm run test
       - name: Git status
