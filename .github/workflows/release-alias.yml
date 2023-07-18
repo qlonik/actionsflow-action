@@ -13,12 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Generate Token
+        uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: "${{ secrets.BOT_APP_ID }}"
+          private_key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
       - name: Update major tag
         if: github.event.release.prerelease == false
         run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          git config user.name "moki-bot"
+          git config user.email "125534110+moki-bot[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${{ steps.generate-token.outputs.token }}@github.com/${GITHUB_REPOSITORY}.git"
           export TAG_NAME="${GITHUB_REF##refs/tags/}"
           export TAG_MAJOR="${TAG_NAME%%.*}"
           git tag --force -a "${TAG_MAJOR}" -m "chore(release): 🤖 release ${TAG_NAME}"

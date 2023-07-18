@@ -24,8 +24,8 @@ jobs:
         run: git checkout main
       - name: Configure CI Git User
         run: |
-          git config user.name github-actions[bot]
-          git config user.email github-actions[bot]@users.noreply.github.com
+          git config user.name moki-bot
+          git config user.email 125534110+moki-bot[bot]@users.noreply.github.com
       - uses: actions/cache@v3
         with:
           path: ~/.npm
@@ -36,6 +36,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: lts/*
+      - name: Generate Token
+        uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: "${{ secrets.BOT_APP_ID }}"
+          private_key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
       - name: Update & Build
         run: |
           npm ci
@@ -44,10 +50,11 @@ jobs:
           npm run test
       - name: Git status
         run: git status
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit built files
         run: |
           git add dist/main/index.js dist/post/index.js package.json package-lock.json
           git diff-index --quiet HEAD || git commit -m "chore(release): 🤖 update actionsflow dependence & build bundle"
-          npm run release
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: npm run release
