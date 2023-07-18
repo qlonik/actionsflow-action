@@ -50,11 +50,10 @@ jobs:
           npm run test
       - name: Git status
         run: git status
-      - name: Commit built files
+      - name: Fail on unexpected uncommitted files
         run: |
-          git add dist/main/index.js dist/post/index.js package.json package-lock.json
-          git diff-index --quiet HEAD || git commit -m "chore(release): 🤖 update actionsflow dependence & build bundle"
+          git diff --quiet HEAD -- :^dist :^package.json :^package-lock.json
       - name: Release
         env:
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
-        run: npm run release
+        run: npm exec --no -- release-it
