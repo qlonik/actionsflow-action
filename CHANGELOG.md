@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/actionsflow/actionsflow-action/compare/v1...v2.0.0) (2023-07-18)
+
+### chore
+
+- update project ([6e9494d](https://github.com/actionsflow/actionsflow-action/commit/6e9494dade3a4742b4fd1a17689b85cd5f29aba3))
+
+### BREAKING CHANGES
+
+- targeting NodeJS >=16 and other major package upgrades
+
 ## [1.2.11](https://github.com/actionsflow/actionsflow-action/compare/v1...v1.2.11) (2021-11-30)
 
 ## [1.2.10](https://github.com/actionsflow/actionsflow-action/compare/v1...v1.2.10) (2021-07-06)
