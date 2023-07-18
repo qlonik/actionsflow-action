@@ -1,3 +1,9 @@
+## [2.0.4](https://github.com/actionsflow/actionsflow-action/compare/v2...v2.0.4) (2023-07-18)
+
+### Bug Fixes
+
+- handle error accessing github api ([43d8e3d](https://github.com/actionsflow/actionsflow-action/commit/43d8e3db88b929959bd75296bdbc4fd4968dc876))
+
 ## [2.0.3](https://github.com/actionsflow/actionsflow-action/compare/v2.0.2...v2.0.3) (2023-07-18)
 
 ## [2.0.2](https://github.com/actionsflow/actionsflow-action/compare/v2...v2.0.2) (2023-07-18)
