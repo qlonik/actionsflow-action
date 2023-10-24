@@ -1,3 +1,13 @@
+# [3.0.0](https://github.com/actionsflow/actionsflow-action/compare/v2...v3.0.0) (2023-10-24)
+
+- feat!: update action runs.using to node20 ([1685247](https://github.com/actionsflow/actionsflow-action/commit/16852471fe387720f5b89f28ac9f623e12840b28))
+
+### BREAKING CHANGES
+
+- Requires Github Runner >= v2.308.0 to support 'node20'
+  runs.using field. The release notes can be seen here:
+  https://github.com/actions/runner/releases/tag/v2.308.0.
+
 ## [2.0.4](https://github.com/actionsflow/actionsflow-action/compare/v2...v2.0.4) (2023-07-18)
 
 ### Bug Fixes
