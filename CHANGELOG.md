@@ -1,3 +1,5 @@
+## [3.0.1](https://github.com/actionsflow/actionsflow-action/compare/v3...v3.0.1) (2023-10-24)
+
 # [3.0.0](https://github.com/actionsflow/actionsflow-action/compare/v2...v3.0.0) (2023-10-24)
 
 - feat!: update action runs.using to node20 ([1685247](https://github.com/actionsflow/actionsflow-action/commit/16852471fe387720f5b89f28ac9f623e12840b28))
