@@ -1,3 +1,9 @@
+# [3.1.0](https://github.com/actionsflow/actionsflow-action/compare/v3...v3.1.0) (2024-05-05)
+
+### Features
+
+- update [@actions](https://github.com/actions) toolkit packages ([#13](https://github.com/actionsflow/actionsflow-action/issues/13)) ([686357d](https://github.com/actionsflow/actionsflow-action/commit/686357df66e39cb1e388b454e28534622c9109a6))
+
 ## [3.0.1](https://github.com/actionsflow/actionsflow-action/compare/v3...v3.0.1) (2023-10-24)
 
 # [3.0.0](https://github.com/actionsflow/actionsflow-action/compare/v2...v3.0.0) (2023-10-24)
