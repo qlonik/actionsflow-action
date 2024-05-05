@@ -22,7 +22,7 @@ async function main() {
   core.debug(`cwd: ${process.cwd()}`);
   let args = core.getInput("args");
   const isDebug = core.isDebug();
-  const using = core.getInput("using") || "auto";
+  const _using = core.getInput("using") || "auto";
   const jsonSecrets = core.getInput("json-secrets") || "";
   const jsonGithub = core.getInput("json-github") || "";
 
@@ -44,7 +44,7 @@ async function main() {
   }
   if (isBuild) {
     buildRunner = await getBuildRunner({
-      using: using,
+      using: _using,
       args: args,
     });
     await exportBuildRunner(buildRunner);
@@ -55,8 +55,8 @@ async function main() {
     await restoreCache();
     core.info(
       `Restore actionsflow cache complete (${formatSpendTime(
-        Date.now() - timestamp
-      )})`
+        Date.now() - timestamp,
+      )})`,
     );
   } else if (isClean) {
     await exportLastUpdateAtEnv();
@@ -80,8 +80,8 @@ async function main() {
         await createCli(args);
         core.info(
           `Run actionsflow complete (${formatSpendTime(
-            Date.now() - timestamp
-          )})`
+            Date.now() - timestamp,
+          )})`,
         );
       } else if (buildRunner === "local") {
         core.info("Use local node modules actionsflow to build");
@@ -96,7 +96,9 @@ async function main() {
       // use action for other command
       await createCli(args);
       core.info(
-        `Run actionsflow complete  (${formatSpendTime(Date.now() - timestamp)})`
+        `Run actionsflow complete  (${formatSpendTime(
+          Date.now() - timestamp,
+        )})`,
       );
     }
 
@@ -107,15 +109,15 @@ async function main() {
       await uploadCache();
       core.info(
         `Upload actionsflow cache complete (${formatSpendTime(
-          Date.now() - timestamp
-        )})`
+          Date.now() - timestamp,
+        )})`,
       );
       timestamp = Date.now();
       await uploadCacheKeyFile();
       core.info(
         `Upload actionsflow cache key complete (${formatSpendTime(
-          Date.now() - timestamp
-        )})`
+          Date.now() - timestamp,
+        )})`,
       );
     } else if (isClean) {
       let timestamp = Date.now();
@@ -126,15 +128,15 @@ async function main() {
       await uploadCache();
       core.info(
         `Upload actionsflow empty cache complete (${formatSpendTime(
-          Date.now() - timestamp
-        )})`
+          Date.now() - timestamp,
+        )})`,
       );
       timestamp = Date.now();
       await uploadCacheKeyFile();
       core.info(
         `Upload actionsflow cache key complete (${formatSpendTime(
-          Date.now() - timestamp
-        )})`
+          Date.now() - timestamp,
+        )})`,
       );
     }
 
@@ -152,7 +154,7 @@ async function main() {
     if (isBuild) {
       core.saveState("success", "false");
       core.info(
-        "There are some errors occurred, but we will continue the process, we'll throw error at post action"
+        "There are some errors occurred, but we will continue the process, we'll throw error at post action",
       );
       core.info(error);
     } else {
@@ -160,7 +162,7 @@ async function main() {
     }
   }
   core.info(
-    `Actionsflow done in ${formatSpendTime(Date.now() - allStartTimeStamp)}`
+    `Actionsflow done in ${formatSpendTime(Date.now() - allStartTimeStamp)}`,
   );
 }
 
